@@ -127,8 +127,12 @@ int main(){
 	
 	cout << "---TESTING LAB 8---" << endl;
 	int loop = 0;
+	BaseConic *base = &e1;
 
 	e1.display();
+	cout << "\nPrinting e1 data using the pointer" << endl;
+	base->display();
+	cout << endl;
 	c1.display();
 
 	while (loop != 7) {
