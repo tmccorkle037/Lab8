@@ -24,8 +24,10 @@ class Ellipse : public BaseConic {
 		double a; 	// semi-major axis
 		double b; 	// semi-minor axis
 		double angle; // orientation angle
-		double vertice1;
-		double vertice2;
+		double vertice1x;
+		double vertice1y;
+        double vertice2x;
+        double vertice2y;
 		double originX;
 		double originY;
 
@@ -43,11 +45,11 @@ class Ellipse : public BaseConic {
 // an object is created.
 // Notice how the BaseConic constructor can be called. If other constructors where defined,
 // those could be used instead.
-Ellipse::Ellipse(double x0=1,double y0=0,double a0=0,double b0=0,double an0=0) : BaseConic(x0,y0) {
-	// x and y are set in the BaseConic constuctor
-	a = a0;
-	b = b0;
-	angle = an0;
+Ellipse::Ellipse(double x0=1,double y0=0,double a0=0,double b0=0,double an0=0) : BaseConic(x0,y0){
+    // x and y are set in the BaseConic constuctor
+    a = a0;
+    b = b0;
+    angle = an0;
 }
 
 void Ellipse::display() {
@@ -62,11 +64,21 @@ void Ellipse::resize(double major, double minor ){
 }
 
 void Ellipse::calculate(){
-	vertice1 = (a/2)-x;
-	vertice2 = (a/2)+x;
-
-	cout << "left vertice is at: " << vertice1 << endl;
-	cout <<"Right vertice is at: " << vertice2 << endl;
+    if(a > b){
+        vertice1x = x - (a/2);
+        vertice1y = y;
+        vertice2x = x + (a/2);
+        vertice2y = y;
+    }
+    else{
+        vertice1x = x ;
+        vertice1y = y - (b/2);
+        vertice2x = x;
+        vertice2y = y + (b/2);
+    }
+    
+	cout << "left vertice is at: (" << vertice1x << "," << vertice1y << ")" << endl;
+	cout <<"Right vertice is at: (" << vertice2x << "," << vertice2y << ")" << endl;
 }
 
 class Circle : public BaseConic {
@@ -97,7 +109,7 @@ bool Circle::inOrOut(double x, double y){
 }
 int main(){
 	//BaseConic b0;	// not possible to create an object of the ABC
-	Ellipse e0, e1(1), e2(2,3), e3(4,5,6), e4(7,8,9,10), e5(0.1,0.2,0.3,0.4,0.5);
+    Ellipse e0, e1(1); //e2(2,3), e3(4,5,6), e4(7,8,9,10), e5(0.1,0.2,0.3,0.4,0.5);
 	Circle c0, c1(2,-1,5);
 		
 //	e0.display();	e1.display();	e2.display();
