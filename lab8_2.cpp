@@ -132,7 +132,7 @@ void Signal::offsetData(double offset) {
     //cout << "inside offset method" << endl;
     //cout << "length = " << length << endl;
     if(length == 0){
-        throw "ERROR";
+        throw "ERROR: Data is empty";
     }
     double tempVal = 0;
     newData.clear();
@@ -155,8 +155,8 @@ void Signal::scaleData(double scale) throw(int){
         }
     }
     catch(int x){
-        cout << "The scaling factor cannot be 0" << endl;
-        throw;  //go to switch statement and cout unexpected error
+        cout << "ERROR: The scaling factor cannot be 0" << endl;
+        throw;  //go to switch statement and cout "unexpected error"
     }
     
     for (int i = 0; i < length; i++) {
@@ -166,7 +166,7 @@ void Signal::scaleData(double scale) throw(int){
     }
 }
 
-double Signal::getAverage() {	//returns the average which is a double
+double Signal::getAverage() {	//returns the average as a double
     double ave = 0;
     if (newData.size() == 0) {
         for (int i = 0; i < length; i++) {
@@ -470,7 +470,8 @@ int main(int argc, char **argv) {
             Signal s2(num1);
             Signal s3(num2);
             Signal s4 = operator+(s2, s3);
-            //cout << "s4 created" << endl;
+            s4.sig_info();
+            
             cout << "\nAgain? 1:Yes 0:No" << endl;
             cin >> opt;
         }
